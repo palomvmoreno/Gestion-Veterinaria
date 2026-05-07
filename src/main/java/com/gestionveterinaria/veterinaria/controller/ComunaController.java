@@ -22,46 +22,44 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/api/v1/comunas")
 public class ComunaController {
-    @Autowired
+   @Autowired
     private ComunaService comunaService;
 
     @GetMapping
-    public ResponseEntity<List<ComunaDTO>> todasLasComunas() {
+    public ResponseEntity<?> todasLasComunas() {
         List<ComunaDTO> comunas = comunaService.obtenerTodas();
-        if (comunas.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        if (!comunas.isEmpty()) {
+            return new ResponseEntity<>(comunas, HttpStatus.OK);
         }
-        return new ResponseEntity<>(comunas, HttpStatus.OK);
+        return new ResponseEntity<>("No hay comunas", HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ComunaDTO> buscarPorId(@PathVariable Integer id) {
+    public ResponseEntity<?> comunaPorId(@PathVariable Integer id) {
         try {
             ComunaDTO comuna = comunaService.buscarPorId(id);
-            return new ResponseEntity<>(comuna, HttpStatus.OK);
+            return new ResponseEntity<>(comuna, HttpStatus.ACCEPTED);
         } catch (RuntimeException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("No se encontró la comuna", HttpStatus.NOT_FOUND);
         }
     }
 
     @PostMapping
-    public ResponseEntity<Comuna> agregarComuna(@Valid @RequestBody Comuna comuna) {
+    public ResponseEntity<?> agregarComuna(@Valid @RequestBody Comuna comuna) {
         try {
-            Comuna guardada = comunaService.guardar(comuna);
-            return new ResponseEntity<>(guardada, HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(comunaService.guardar(comuna), HttpStatus.CREATED);
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>("No se pudo guardar la comuna", HttpStatus.BAD_REQUEST);
         }
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminarComuna(@PathVariable Integer id) {
-        String resultado = comunaService.eliminar(id);
-        
-        if (resultado.contains("exitosamente")) {
+        try {
+            String resultado = comunaService.eliminar(id);
             return new ResponseEntity<>(resultado, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(resultado, HttpStatus.NOT_FOUND);
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
 
