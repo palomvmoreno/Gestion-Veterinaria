@@ -8,7 +8,7 @@ import lombok.Data;
 public class ComunaDTO {
     private Integer id;
     private String nombre;
-    private String nombreRegion; // Igual que nombreParty
+    private String nombreRegion; 
     private List<String> nombresClinicas;
 
 }
