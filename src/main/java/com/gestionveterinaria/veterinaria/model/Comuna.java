@@ -38,5 +38,4 @@ public class Comuna {
     @JoinColumn(name = "region_id")
     private Region region;
     
-    
 }
