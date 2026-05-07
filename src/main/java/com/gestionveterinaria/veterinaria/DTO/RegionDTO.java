@@ -1,22 +1,10 @@
 package com.gestionveterinaria.veterinaria.DTO;
 
+import lombok.Data;
+
+@Data
 public class RegionDTO {
     private Integer id;
     private String nombre;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+    
 }
