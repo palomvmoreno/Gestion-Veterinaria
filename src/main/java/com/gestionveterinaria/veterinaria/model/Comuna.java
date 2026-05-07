@@ -38,4 +38,6 @@ public class Comuna {
     @JoinColumn(name = "region_id")
     private Region region;
     
+    @OneToMany(mappedBy = "comuna")
+    private List<Clinica> clinicas;
 }
