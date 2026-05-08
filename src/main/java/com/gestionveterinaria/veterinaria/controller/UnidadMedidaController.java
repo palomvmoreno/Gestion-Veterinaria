@@ -18,7 +18,7 @@ import com.gestionveterinaria.veterinaria.model.UnidadMedida;
 import com.gestionveterinaria.veterinaria.service.UnidadMedidaService;
 
 @RestController
-@RequestMapping("api/v1/unidadmedida")
+@RequestMapping("/api/v1/unidadmedida")
 public class UnidadMedidaController {
     @Autowired
     private UnidadMedidaService unimedService;

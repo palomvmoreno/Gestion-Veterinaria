@@ -18,7 +18,7 @@ import com.gestionveterinaria.veterinaria.model.CategoriaInsumo;
 import com.gestionveterinaria.veterinaria.service.CatInsumoService;
 
 @RestController
-@RequestMapping("api/v1/catinsumos")
+@RequestMapping("/api/v1/catinsumos")
 public class CatInsumoController {
     @Autowired
     private CatInsumoService catService;

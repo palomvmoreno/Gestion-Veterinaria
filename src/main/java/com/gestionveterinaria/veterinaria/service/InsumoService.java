@@ -49,12 +49,13 @@ public class InsumoService {
         .toList();
     }
 
-    public Insumo guardarInsumo(Insumo insumo){
-        return insumoRepository.save(insumo);
+    public InsumoDTO guardarInsumo(Insumo insumo){
+        insumoRepository.save(insumo);
+        return toDTO(insumo);
     }
 
     public InsumoDTO actualizarInsumo(Integer id, InsumoDTO insumoDTO){
-        Insumo insumo = insumoRepository.findById(id).orElseThrow(() -> new RuntimeException("Insumo no encontrado"));
+        Insumo insumo = insumoRepository.findById(id).orElseThrow(() -> new RuntimeException("No se pudo encontrar el Insumo"));
 
         CategoriaInsumo categoria = categoriaRepository.buscarPorNombre(insumoDTO.getCategoriaNombre())
         .orElseThrow(() -> new RuntimeException("No se pudo encontrar la categoria"));
