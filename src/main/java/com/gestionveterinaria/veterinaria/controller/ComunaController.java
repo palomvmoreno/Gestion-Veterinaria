@@ -26,40 +26,42 @@ public class ComunaController {
     private ComunaService comunaService;
 
     @GetMapping
-    public ResponseEntity<?> todasLasComunas() {
+    public ResponseEntity<List<ComunaDTO>> todasLasComunas() {
         List<ComunaDTO> comunas = comunaService.obtenerTodas();
-        if (!comunas.isEmpty()) {
-            return new ResponseEntity<>(comunas, HttpStatus.OK);
+        if (comunas.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>("No hay comunas", HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(comunas, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> comunaPorId(@PathVariable Integer id) {
+    public ResponseEntity<ComunaDTO> buscarPorId(@PathVariable Integer id) {
         try {
             ComunaDTO comuna = comunaService.buscarPorId(id);
-            return new ResponseEntity<>(comuna, HttpStatus.ACCEPTED);
+            return new ResponseEntity<>(comuna, HttpStatus.OK);
         } catch (RuntimeException e) {
-            return new ResponseEntity<>("No se encontró la comuna", HttpStatus.NOT_FOUND);
+            // Estilo profe: 404 limpio
+            return ResponseEntity.notFound().build();
         }
     }
 
     @PostMapping
-    public ResponseEntity<?> agregarComuna(@Valid @RequestBody Comuna comuna) {
+    public ResponseEntity<Comuna> agregarComuna(@Valid @RequestBody Comuna comuna) {
         try {
-            return new ResponseEntity<>(comunaService.guardar(comuna), HttpStatus.CREATED);
-        } catch (RuntimeException e) {
-            return new ResponseEntity<>("No se pudo guardar la comuna", HttpStatus.BAD_REQUEST);
+            Comuna guardada = comunaService.guardar(comuna);
+            return new ResponseEntity<>(guardada, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminarComuna(@PathVariable Integer id) {
-        try {
-            String resultado = comunaService.eliminar(id);
+        String resultado = comunaService.eliminar(id);
+        if (resultado.contains("exitosamente")) {
             return new ResponseEntity<>(resultado, HttpStatus.OK);
-        } catch (RuntimeException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(resultado, HttpStatus.NOT_FOUND);
         }
     }
 
