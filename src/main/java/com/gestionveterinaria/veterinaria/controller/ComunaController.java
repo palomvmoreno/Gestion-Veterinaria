@@ -40,7 +40,6 @@ public class ComunaController {
             ComunaDTO comuna = comunaService.buscarPorId(id);
             return new ResponseEntity<>(comuna, HttpStatus.OK);
         } catch (RuntimeException e) {
-            // Estilo profe: 404 limpio
             return ResponseEntity.notFound().build();
         }
     }

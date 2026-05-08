@@ -38,7 +38,6 @@ public class RegionController {
             RegionDTO region = regionService.buscarPorId(id);
             return new ResponseEntity<>(region, HttpStatus.OK);
         } catch (RuntimeException e) {
-            // Estilo profe: Si el service lanza excepción, devuelve Not Found
             return ResponseEntity.notFound().build();
         }
     }

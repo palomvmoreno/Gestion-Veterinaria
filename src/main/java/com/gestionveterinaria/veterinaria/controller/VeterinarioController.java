@@ -36,8 +36,8 @@ public class VeterinarioController {
     @GetMapping("/{id}")
     public ResponseEntity<Veterinario> buscarPorId(@PathVariable Integer id) {
         try {
-            Veterinario v = veterinarioService.buscarPorId(id);
-            return new ResponseEntity<>(v, HttpStatus.OK);
+            Veterinario vete = veterinarioService.buscarPorId(id);
+            return new ResponseEntity<>(vete, HttpStatus.OK);
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
         }
