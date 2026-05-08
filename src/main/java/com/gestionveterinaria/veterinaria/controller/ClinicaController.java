@@ -22,44 +22,45 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/api/v1/clinicas")
 public class ClinicaController {
-    @Autowired
+   @Autowired
     private ClinicaService clinicaService;
 
     @GetMapping
-    public ResponseEntity<?> todasLasClinicas() {
+    public ResponseEntity<List<ClinicaDTO>> todasLasClinicas() {
         List<ClinicaDTO> clinicas = clinicaService.obtenerTodas();
-        if (!clinicas.isEmpty()) {
-            return new ResponseEntity<>(clinicas, HttpStatus.OK);
+        if (clinicas.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>("No hay clínicas veterinarias", HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(clinicas, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> clinicaPorId(@PathVariable Integer id) {
+    public ResponseEntity<ClinicaDTO> buscarPorId(@PathVariable Integer id) {
         try {
             ClinicaDTO clinica = clinicaService.buscarPorId(id);
-            return new ResponseEntity<>(clinica, HttpStatus.ACCEPTED);
+            return new ResponseEntity<>(clinica, HttpStatus.OK);
         } catch (RuntimeException e) {
-            return new ResponseEntity<>("No se exite la clínica", HttpStatus.NOT_FOUND);
+            return ResponseEntity.notFound().build();
         }
     }
 
     @PostMapping
-    public ResponseEntity<?> agregarClinica(@Valid @RequestBody Clinica clinica) {
+    public ResponseEntity<Clinica> agregarClinica(@Valid @RequestBody Clinica clinica) {
         try {
-            return new ResponseEntity<>(clinicaService.guardar(clinica), HttpStatus.CREATED);
-        } catch (RuntimeException e) {
-            return new ResponseEntity<>("No se pudo guardar la clínica", HttpStatus.BAD_REQUEST);
+            Clinica guardada = clinicaService.guardar(clinica);
+            return new ResponseEntity<>(guardada, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminarClinica(@PathVariable Integer id) {
-        try {
-            String resultado = clinicaService.eliminar(id);
+        String resultado = clinicaService.eliminar(id);
+        if (resultado.contains("exitosamente")) {
             return new ResponseEntity<>(resultado, HttpStatus.OK);
-        } catch (RuntimeException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(resultado, HttpStatus.NOT_FOUND);
         }
     }
 
