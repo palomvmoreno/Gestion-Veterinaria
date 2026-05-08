@@ -58,7 +58,7 @@ public class ComunaController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminarComuna(@PathVariable Integer id) {
         String resultado = comunaService.eliminar(id);
-        if (resultado.contains("exitosamente")) {
+        if (resultado.contains("Eliminado")) {
             return new ResponseEntity<>(resultado, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(resultado, HttpStatus.NOT_FOUND);

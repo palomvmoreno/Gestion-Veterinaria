@@ -57,7 +57,7 @@ public class ClinicaController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminarClinica(@PathVariable Integer id) {
         String resultado = clinicaService.eliminar(id);
-        if (resultado.contains("exitosamente")) {
+        if (resultado.contains("Eliminado")) {
             return new ResponseEntity<>(resultado, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(resultado, HttpStatus.NOT_FOUND);

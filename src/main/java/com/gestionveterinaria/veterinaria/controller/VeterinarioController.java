@@ -56,7 +56,7 @@ public class VeterinarioController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminar(@PathVariable Integer id) {
         String resultado = veterinarioService.eliminar(id);
-        if (resultado.contains("exitosamente") || resultado.contains("eliminado")) {
+        if (resultado.contains("Eliminado")) {
             return new ResponseEntity<>(resultado, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(resultado, HttpStatus.NOT_FOUND);
