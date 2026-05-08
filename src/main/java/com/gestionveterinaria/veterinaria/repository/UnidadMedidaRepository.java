@@ -14,4 +14,7 @@ public interface UnidadMedidaRepository extends JpaRepository<UnidadMedida, Inte
 
     @Query("SELECT u.nombre FROM UnidadMedida u WHERE LOWER(u.abreviatura) = LOWER(:abreviatura)")
     Optional<String> obtenerNombrePorAbreviatura(@Param("abreviatura") String abreviatura);
+
+    @Query("SELECT u FROM UnidadMedida u WHERE u.abreviatura = :abreviatura")
+Optional<UnidadMedida> buscarPorAbreviatura(@Param("abreviatura") String abreviatura);
 }
