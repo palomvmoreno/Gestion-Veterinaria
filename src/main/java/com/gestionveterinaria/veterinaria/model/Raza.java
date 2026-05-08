@@ -14,30 +14,30 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
-@Table(name = "comunas")
-public class Comuna {
+@Table(name = "raza")
+@NoArgsConstructor
+@AllArgsConstructor
+public class Raza {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotBlank(message = "El nombre de la comuna es obligatorio")
-    @Size(min = 2, max = 30, message = "El nombre debe tener entre 2 y 30 caracteres")
-    @Column(nullable = false, length = 30)
+    @NotBlank(message = "El nombre de la raza es obligatorio")
+    @Column(nullable = false, length = 50)
+    @Size(min = 3, max = 50, message = "El nombre debe tener entre 3 y 50 caracteres")
     private String nombre;
-
-    @ManyToOne
-    @JoinColumn(name = "region_id")
-    private Region region;
     
-    @OneToMany(mappedBy = "comuna")
-    private List<Clinica> clinicas;
+    @ManyToOne
+    @JoinColumn(name = "especie_id", nullable = false)
+    private Especie especie;
+
+    @OneToMany(mappedBy = "raza")
+    private List<Mascota> mascotas;
+
 }
