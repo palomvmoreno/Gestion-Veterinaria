@@ -34,7 +34,7 @@ public class DuenioController {
 
     @GetMapping("nombreMascotas/{nombreMascotas}")
     public List<DuenioDTO> buscarPorNombreMascotas(@PathVariable String nombreMascotas) {
-        return duenioService.
+        return duenioService.buscarPorNombreMascota(nombreMascotas);
     }
 
     @PostMapping
