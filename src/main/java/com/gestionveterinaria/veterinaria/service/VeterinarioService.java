@@ -16,7 +16,6 @@ public class VeterinarioService {
     @Autowired
     private VeterinarioRepository veterinarioRepository;
 
-    // Obtiene la lista completa de profesionales
     public List<Veterinario> obtenerTodos() {
         return veterinarioRepository.findAll();
     }

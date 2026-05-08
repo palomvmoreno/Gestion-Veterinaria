@@ -53,7 +53,7 @@ public class ClinicaService {
         if (clinica.getComuna() != null) {
             dto.setNombreComuna(clinica.getComuna().getNombre());
         } else {
-            dto.setNombreComuna("Sin comuna asignada, clínica errante");
+            dto.setNombreComuna("   No tiene comuna asignada   ");
         }
 
         return dto;
