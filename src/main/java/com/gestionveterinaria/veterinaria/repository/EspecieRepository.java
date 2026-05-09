@@ -7,5 +7,6 @@ import com.gestionveterinaria.veterinaria.model.Especie;
 
 @Repository
 public interface EspecieRepository extends JpaRepository<Especie, Integer> {
+    
 
 }

@@ -11,7 +11,10 @@ import com.gestionveterinaria.veterinaria.model.Duenio;
 import com.gestionveterinaria.veterinaria.model.Mascota;
 import com.gestionveterinaria.veterinaria.repository.DuenioRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
+@Transactional
 public class DuenioService {
 
     @Autowired
