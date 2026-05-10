@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -37,5 +38,9 @@ public class Veterinario {
     @NotBlank(message = "La especialidad es obligatoria")
     @Column(nullable = false, length = 50)
     private String especialidad;
+
+    @NotBlank(message = "El email es obligatorio")
+    @Email(message = "Debe ingresar un formato de email valido")
+    private String email;
 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.gestionveterinaria.veterinaria.DTO.VeterinarioDTO;
 import com.gestionveterinaria.veterinaria.model.Veterinario;
 import com.gestionveterinaria.veterinaria.repository.VeterinarioRepository;
 
@@ -16,13 +17,16 @@ public class VeterinarioService {
     @Autowired
     private VeterinarioRepository veterinarioRepository;
 
-    public List<Veterinario> obtenerTodos() {
-        return veterinarioRepository.findAll();
+    public List<VeterinarioDTO> obtenerTodos() {
+        return veterinarioRepository.findAll().stream()
+                .map(this::convertirADTO)
+                .toList();
     }
 
-    public Veterinario buscarPorId(Integer id) {
-        return veterinarioRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException(" El Veterinario no existe en los registros!"));
+    public VeterinarioDTO buscarPorId(Integer id) {
+        Veterinario v = veterinarioRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("El veterinario no existe."));
+        return convertirADTO(v);
     }
 
     public Veterinario guardar(Veterinario veterinario) {
@@ -32,12 +36,21 @@ public class VeterinarioService {
     public String eliminar(Integer id) {
         try {
             Veterinario v = veterinarioRepository.findById(id)
-                    .orElseThrow(() -> new RuntimeException(" No existe y como no existe no se puede eliminar."));
+                    .orElseThrow(() -> new RuntimeException("No existe el veterinario con ID " + id));
             veterinarioRepository.delete(v);
-            return "El veterinario " + v.getNombre() + " ha sido eliminado.";
+            return "Veterinario eliminado exitosamente.";
         } catch (RuntimeException e) {
             return e.getMessage();
         }
+    }
+
+    private VeterinarioDTO convertirADTO(Veterinario v) {
+        VeterinarioDTO dto = new VeterinarioDTO();
+        dto.setId(v.getId());
+        dto.setNombre(v.getNombre());
+        dto.setApellido(v.getApellido());
+        dto.setEmail(v.getEmail());
+        return dto;
     }
 
 }
