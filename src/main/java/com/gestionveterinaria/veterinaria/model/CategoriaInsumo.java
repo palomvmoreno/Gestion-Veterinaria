@@ -34,7 +34,7 @@ public class CategoriaInsumo {
     @Column(name = "nombreCategoria", nullable = false)
     private String categoria;
 
-    @OneToMany(mappedBy = "categoria")
+    @OneToMany(mappedBy = "categoriaInsumo")
     private List<Insumo> insumos;
 
 }
