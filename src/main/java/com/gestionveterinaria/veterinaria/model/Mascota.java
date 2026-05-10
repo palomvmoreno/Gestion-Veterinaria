@@ -14,6 +14,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import lombok.Builder;
 
 @Data
@@ -46,6 +47,8 @@ public class Mascota {
     @JoinColumn(name = "raza_id")
     private Raza raza;
 
+    @OneToMany(mappedBy = "mascota")
+    private java.util.List<Consulta> consultas;
 
     
 

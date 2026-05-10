@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -38,6 +39,8 @@ public class MetPago {
     @Size(max = 200, message = "La descripción del método de pago no puede exceder los 200 caracteres")
     private String descripcion;
 
+    @OneToMany(mappedBy = "metPago")
+    private java.util.List<Consulta> consultas;
     
 
 

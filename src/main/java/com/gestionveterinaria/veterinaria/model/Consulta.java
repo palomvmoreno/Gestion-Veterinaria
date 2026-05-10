@@ -37,4 +37,11 @@ public class Consulta {
     @JoinColumn(name = "veterinario_id")
     private Veterinario veterinario;
 
+    @ManyToOne
+    @JoinColumn(name = "mascota_id")
+    private Mascota mascota;
+
+    @ManyToOne
+    @JoinColumn(name = "met_pago_id")
+    private MetPago metPago;
 }

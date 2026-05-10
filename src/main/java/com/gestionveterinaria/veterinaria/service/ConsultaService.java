@@ -61,6 +61,18 @@ public class ConsultaService {
             dto.setNombreVeterinario("Sin veterinario");
         }
 
+        if (consulta.getMascota() != null) {
+            dto.setNombreMascota(consulta.getMascota().getNombre());
+        } else {
+            dto.setNombreMascota("Mascota no registrada");
+        }
+
+        if (consulta.getMetPago() != null) {
+            dto.setNombreMetodoPago(consulta.getMetPago().getNombre());
+        } else {
+            dto.setNombreMetodoPago("Método de pago no definido");
+        }
+
         return dto;
     }
 

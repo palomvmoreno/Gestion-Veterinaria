@@ -8,5 +8,7 @@ public class ConsultaDTO {
     private String detalle;
     private String nombreClinica;
     private String nombreVeterinario;
+    private String nombreMascota;
+    private String nombreMetodoPago;
 
 }
