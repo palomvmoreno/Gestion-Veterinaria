@@ -1,12 +1,12 @@
 package com.gestionveterinaria.veterinaria.DTO;
 
-import java.util.List;
-
 import lombok.Data;
 
 @Data
-public class EspecieDTO {
+public class MetPagoDTO {
     private Integer id;
     private String nombre;
-    private List<String> nombresRazas;
+    private String descripcion;
+    private String rut;
+
 }
