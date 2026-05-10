@@ -52,14 +52,4 @@ public class RegionController {
         }
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> eliminarRegion(@PathVariable Integer id) {
-        String resultado = regionService.eliminar(id);
-        if (resultado.contains("Eliminado exitosamente")) {
-            return new ResponseEntity<>(resultado, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(resultado, HttpStatus.NOT_FOUND);
-        }
-    }
-
 }
