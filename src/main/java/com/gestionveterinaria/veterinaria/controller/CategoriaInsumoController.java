@@ -13,19 +13,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gestionveterinaria.veterinaria.DTO.CatInsumoDTO;
+import com.gestionveterinaria.veterinaria.DTO.CategoriaInsumoDTO;
 import com.gestionveterinaria.veterinaria.model.CategoriaInsumo;
-import com.gestionveterinaria.veterinaria.service.CatInsumoService;
+import com.gestionveterinaria.veterinaria.service.CategoriaInsumoService;
 
 @RestController
 @RequestMapping("/api/v1/catinsumos")
-public class CatInsumoController {
+public class CategoriaInsumoController {
     @Autowired
-    private CatInsumoService catService;
+    private CategoriaInsumoService catService;
 
     @GetMapping
-    public ResponseEntity<List<CatInsumoDTO>> obtenerCategorias(){
-        List<CatInsumoDTO> lista = catService.obtenerTodas();
+    public ResponseEntity<List<CategoriaInsumoDTO>> obtenerCategorias(){
+        List<CategoriaInsumoDTO> lista = catService.obtenerTodas();
         if(lista.isEmpty()){
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
         }else{

@@ -15,16 +15,16 @@ import jakarta.transaction.Transactional;
 @Transactional
 public class UnidadMedidaService {
     @Autowired
-    private UnidadMedidaRepository unimedRepository;
+    private UnidadMedidaRepository unidadMedidaRepository;
 
     public List<UnidadMedidaDTO> obtenerUnidadMedida(){
-        return unimedRepository.findAll().stream()
+        return unidadMedidaRepository.findAll().stream()
         .map(this::toDTO)
         .toList();
     }
 
     public UnidadMedidaDTO buscarNombreAbreviatura(String abrev){
-        String nombre = unimedRepository.obtenerNombrePorAbreviatura(abrev)
+        String nombre = unidadMedidaRepository.obtenerNombrePorAbreviatura(abrev)
         .orElseThrow(() -> new RuntimeException("Abreviatura no encontrada"));
 
         UnidadMedidaDTO dto = new UnidadMedidaDTO();
@@ -35,14 +35,14 @@ public class UnidadMedidaService {
     }
 
     public void eliminarUnimed(Integer id){
-        UnidadMedida unidad = unimedRepository.findById(id)
+        UnidadMedida unidad = unidadMedidaRepository.findById(id)
         .orElseThrow(() -> new RuntimeException("Unidad de medida no encontrada"));
 
-        unimedRepository.delete(unidad);
+        unidadMedidaRepository.delete(unidad);
     }
 
     public UnidadMedida saveUnimed(UnidadMedida unimed){
-        return unimedRepository.save(unimed);
+        return unidadMedidaRepository.save(unimed);
     }
 
     private UnidadMedidaDTO toDTO(UnidadMedida UM){

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.gestionveterinaria.veterinaria.model.CategoriaInsumo;
 
 @Repository
-public interface CatInsumoRepository extends JpaRepository<CategoriaInsumo, Integer>{
+public interface CategoriaInsumoRepository extends JpaRepository<CategoriaInsumo, Integer>{
 
     @Query("SELECT c FROM CategoriaInsumo c WHERE c.categoria = :nombre")
     Optional<CategoriaInsumo> buscarPorNombre(@Param("nombre") String nombre);

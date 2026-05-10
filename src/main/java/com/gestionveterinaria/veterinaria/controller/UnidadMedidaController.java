@@ -21,11 +21,11 @@ import com.gestionveterinaria.veterinaria.service.UnidadMedidaService;
 @RequestMapping("/api/v1/unidadmedida")
 public class UnidadMedidaController {
     @Autowired
-    private UnidadMedidaService unimedService;
+    private UnidadMedidaService unidadMedidaService;
 
     @GetMapping
     public ResponseEntity<List<UnidadMedidaDTO>> obtenenrUnidadesMedida(){
-        List<UnidadMedidaDTO> unidades = unimedService.obtenerUnidadMedida();
+        List<UnidadMedidaDTO> unidades = unidadMedidaService.obtenerUnidadMedida();
         if(unidades.isEmpty()){
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
         }else{
@@ -36,7 +36,7 @@ public class UnidadMedidaController {
     @GetMapping("/{abrev}")
     public ResponseEntity<UnidadMedidaDTO> obtenerNombre(@PathVariable String abrev){
         try {
-            UnidadMedidaDTO unidad = unimedService.buscarNombreAbreviatura(abrev);
+            UnidadMedidaDTO unidad = unidadMedidaService.buscarNombreAbreviatura(abrev);
             return ResponseEntity.ok(unidad);
         } catch (Exception e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
@@ -46,7 +46,7 @@ public class UnidadMedidaController {
     @PostMapping
     public ResponseEntity<UnidadMedida> guardarUnidadMedida(@RequestBody UnidadMedida UM){
         try{
-            UnidadMedida uni = unimedService.saveUnimed(UM);
+            UnidadMedida uni = unidadMedidaService.saveUnimed(UM);
             return ResponseEntity.status(HttpStatus.CREATED).body(uni);
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
@@ -56,7 +56,7 @@ public class UnidadMedidaController {
     @DeleteMapping("/id")
     public ResponseEntity<String> eliminarUnidadMedida(@PathVariable Integer id){
         try{
-            unimedService.eliminarUnimed(id);
+            unidadMedidaService.eliminarUnimed(id);
             return ResponseEntity.ok("Unidad Medida eliminada");
         } catch (Exception e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());

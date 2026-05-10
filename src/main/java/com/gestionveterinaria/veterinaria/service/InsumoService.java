@@ -9,7 +9,7 @@ import com.gestionveterinaria.veterinaria.DTO.InsumoDTO;
 import com.gestionveterinaria.veterinaria.model.CategoriaInsumo;
 import com.gestionveterinaria.veterinaria.model.Insumo;
 import com.gestionveterinaria.veterinaria.model.UnidadMedida;
-import com.gestionveterinaria.veterinaria.repository.CatInsumoRepository;
+import com.gestionveterinaria.veterinaria.repository.CategoriaInsumoRepository;
 import com.gestionveterinaria.veterinaria.repository.InsumoRepository;
 import com.gestionveterinaria.veterinaria.repository.UnidadMedidaRepository;
 
@@ -23,7 +23,7 @@ public class InsumoService {
     private InsumoRepository insumoRepository;
 
     @Autowired
-    CatInsumoRepository categoriaRepository;
+    CategoriaInsumoRepository categoriaRepository;
 
     @Autowired
     UnidadMedidaRepository unidadMedidaRepository;

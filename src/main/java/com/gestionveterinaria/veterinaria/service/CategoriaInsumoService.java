@@ -5,19 +5,19 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.gestionveterinaria.veterinaria.DTO.CatInsumoDTO;
+import com.gestionveterinaria.veterinaria.DTO.CategoriaInsumoDTO;
 import com.gestionveterinaria.veterinaria.model.CategoriaInsumo;
-import com.gestionveterinaria.veterinaria.repository.CatInsumoRepository;
+import com.gestionveterinaria.veterinaria.repository.CategoriaInsumoRepository;
 
 import jakarta.transaction.Transactional;
 
 @Service
 @Transactional
-public class CatInsumoService {
+public class CategoriaInsumoService {
     @Autowired
-    private CatInsumoRepository categoriaRepository;
+    private CategoriaInsumoRepository categoriaRepository;
 
-    public List<CatInsumoDTO> obtenerTodas(){
+    public List<CategoriaInsumoDTO> obtenerTodas(){
         return categoriaRepository.findAll().stream()
                 .map(this::toDTO)
                 .toList();
@@ -38,8 +38,8 @@ public class CatInsumoService {
         return categoriaRepository.save(CI);
     }
 
-    private CatInsumoDTO toDTO(CategoriaInsumo CI){
-        CatInsumoDTO catInsDTO = new CatInsumoDTO(CI.getId(), CI.getCategoria());
+    private CategoriaInsumoDTO toDTO(CategoriaInsumo CI){
+        CategoriaInsumoDTO catInsDTO = new CategoriaInsumoDTO(CI.getId(), CI.getCategoria());
         return catInsDTO;
     }
 }
