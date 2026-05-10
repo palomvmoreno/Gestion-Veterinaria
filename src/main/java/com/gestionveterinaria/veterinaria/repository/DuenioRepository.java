@@ -11,7 +11,7 @@ import com.gestionveterinaria.veterinaria.model.Duenio;
 public interface DuenioRepository extends JpaRepository<Duenio, Integer> {
     List<Duenio> findByTelefono(String telefono);
 
-    List<Duenio> findByNombreApellido(String nombre, String apellido);
+    List<Duenio> findByNombreAndApellido(String nombre, String apellido);
 
     List<Duenio> findByMascotas_NombreIgnoreCase(String nombreMascota);
 
