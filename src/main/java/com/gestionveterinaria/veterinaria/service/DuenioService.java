@@ -22,19 +22,19 @@ public class DuenioService {
 
     public List<DuenioDTO> obtenerTodos(){
         return duenioRepository.findAll().stream()
-                .map(this::convertirADTO).
-                toList();
+                .map(this::convertirADTO)
+                .toList();
     }
     public DuenioDTO buscarPorId(Integer id) {
         Duenio duenio = duenioRepository.findById(id)
-        .orElseThrow(() -> new RuntimeException("Duenio no encontrado"));
+                .orElseThrow(() -> new RuntimeException("Duenio no encontrado"));
         return convertirADTO(duenio);
     }
 
     public String eliminar(Integer id){
         try {
             Duenio duenio = duenioRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Duenio no encontrado"));
+                    .orElseThrow(() -> new RuntimeException("Duenio no encontrado"));
             duenioRepository.delete(duenio);
             return "El duenio " + duenio.getNombre() + " " + duenio.getApellido() + " ha sido eliminado correctamente.";
             
@@ -49,7 +49,7 @@ public class DuenioService {
 
     public Duenio actualizar(Integer id, Duenio duenio) {
         Duenio dueno = duenioRepository.findById(id)
-        .orElseThrow(() -> new RuntimeException("Duenio no encontrado"));
+                .orElseThrow(() -> new RuntimeException("Duenio no encontrado"));
         if (duenio.getNombre() != null) {
             duenio.setNombre(duenio.getNombre());
         }
@@ -75,7 +75,7 @@ public class DuenioService {
     }
 
     public List<DuenioDTO> buscarPorNombreApellido(String nombre, String apellido) {
-        return duenioRepository.findByNombreApellido(nombre, apellido).stream()
+        return duenioRepository.findByNombreAndApellido(nombre, apellido).stream()
                 .map(this::convertirADTO)
                 .toList();
     }
