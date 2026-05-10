@@ -7,17 +7,21 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Data
-public class ConsultaDTO {
-    private Integer id;
-    private String detalle;
-    private String nombreClinica;
-    private String nombreVeterinario;
-    private String nombreMascota;
-    private String nombreMetodoPago;
+public class ProcedimientoDTO {
 
-    private List<ProcedimientoDTO> procedimientos;
+    private Integer id;
+
+    private String nombre;
+
+    private String descripcion;
+
+    private Integer costo;
+
+    private Boolean requiereHospitalizacion;
+
+    private List<ProcedimientoInsumoDTO> insumos;
 }

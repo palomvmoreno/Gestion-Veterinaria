@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gestionveterinaria.veterinaria.DTO.ConsultaDTO;
+import com.gestionveterinaria.veterinaria.DTO.ProcedimientoDTO;
 import com.gestionveterinaria.veterinaria.model.Consulta;
+import com.gestionveterinaria.veterinaria.model.Procedimiento;
 import com.gestionveterinaria.veterinaria.repository.ConsultaRepository;
 
 import jakarta.transaction.Transactional;
@@ -73,7 +75,24 @@ public class ConsultaService {
             dto.setNombreMetodoPago("Método de pago no definido");
         }
 
+        if(consulta.getProcedimientos() != null){
+            dto.setProcedimientos(
+                consulta.getProcedimientos()
+                .stream()
+                .map(this::procedimientoToDTO)
+                .toList()
+                );
+        }
         return dto;
     }
 
+    private ProcedimientoDTO procedimientoToDTO(Procedimiento procedimiento){
+    return ProcedimientoDTO.builder()
+        .id(procedimiento.getId())
+        .nombre(procedimiento.getNombre())
+        .descripcion(procedimiento.getDescripcion())
+        .costo(procedimiento.getCosto())
+        .requiereHospitalizacion(procedimiento.getRequiereHospitalizacion())
+        .build();
+    }
 }

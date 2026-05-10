@@ -1,11 +1,14 @@
 package com.gestionveterinaria.veterinaria.model;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -58,4 +61,7 @@ public class Insumo {
     @JoinColumn(name = "unidad_medida_id", nullable = false)
     @NotNull(message = "La unidad de medida es obligatoria")
     private UnidadMedida unidadMedida;
+
+    @OneToMany(mappedBy = "insumo")
+    private List<ProcedimientoInsumo> procedimientos;
 }

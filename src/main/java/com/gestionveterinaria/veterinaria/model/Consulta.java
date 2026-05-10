@@ -1,10 +1,14 @@
 package com.gestionveterinaria.veterinaria.model;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
@@ -44,4 +48,12 @@ public class Consulta {
     @ManyToOne
     @JoinColumn(name = "met_pago_id")
     private MetPago metPago;
+
+    @ManyToMany
+    @JoinTable(
+        name = "consulta_procedimiento",
+        joinColumns = @JoinColumn(name  = "consulta_id"),
+        inverseJoinColumns = @JoinColumn(name = "procedimiento_id")
+    )
+    private List<Procedimiento> procedimientos;
 }
